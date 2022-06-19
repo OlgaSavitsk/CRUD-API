@@ -57,24 +57,25 @@ export async function getUser(
 export async function createUser(req: IncomingMessage, res: ServerResponse) {
   try {
     const body = await getData(req);
-    
+
     const { username, age, hobbies } = JSON.parse(body);
     const user = {
       username,
       age,
       hobbies,
     };
-
-   /*  console.log('1', Object.keys(JSON.parse(body)))
-    console.log(Object.keys(JSON.parse(body)).filter(key => !Object.keys(user).includes(key))) */
-  /*   if (Object.keys(JSON.parse(body)).filter(key => !Object.keys(user).includes(key)).length === 0) {
+    if (
+      Object.keys(JSON.parse(body)).find(
+        (key) => !Object.keys(user).includes(key)
+      )
+    ) {
       res.writeHead(400, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ message: "All fields must be filled" }));
+    } else {
+      const newUser = await create(user);
+      res.writeHead(HTTP_STATUS.OK, { "Content-Type": "text/plain" });
+      res.end(JSON.stringify(newUser));
     }
- */
-    const newUser = await create(user);
-    res.writeHead(HTTP_STATUS.OK, { "Content-Type": "text/plain" });
-    res.end(JSON.stringify(newUser));
   } catch (error) {
     res.writeHead(HTTP_STATUS.INTERNAL_SERVER_ERROR, {
       "Content-Type": "application/json",
