@@ -1,6 +1,6 @@
 # CRUD-API
 
-##Setup
+## Setup
 
 - Clone this repo: $ git clone https://github.com/OlgaSavitsk/CRUD-API.git
 - Go to downloaded folder: $ cd CRUD-API
@@ -9,7 +9,7 @@
 - development mode: $ npm run start:dev
 - production mode: $ npm run start:prod
 
-##Usage
+## Usage
 
 - Get Users
   Returns json data about users.
